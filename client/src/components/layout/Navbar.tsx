@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PixIcon from "@mui/icons-material/Pix";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import FlexBetween from "./FlexBetween";
+import FlexBetween from "../FlexBetween";
+// import GavelIcon from "@mui/icons-material/Gavel";
+import BallotIcon from "@mui/icons-material/Ballot";
+// import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 type NavbarProps = {
   drawerOpen: boolean;
@@ -13,7 +15,7 @@ type NavbarProps = {
 const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("dashboard");
-  
+
   return (
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* LEFT SIDE */}
@@ -25,18 +27,19 @@ const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
           edge="start"
           sx={{
             marginRight: 1,
-            ...(drawerOpen && { display: 'none' }),
+            ...(drawerOpen && { display: "none" }),
           }}
         >
           <MenuIcon />
         </IconButton>
-        <PixIcon sx={{ fontSize: "28px" }} />
+        <BallotIcon sx={{ fontSize: "25px" }} />
         <Typography variant="h4" fontSize="16px">
-          Finanseer
+          BillBoardAI
         </Typography>
       </FlexBetween>
 
       {/* RIGHT SIDE */}
+      <Box pr="2rem"></Box>
       <FlexBetween gap="2rem">
         <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
           <Link
@@ -47,7 +50,7 @@ const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
               textDecoration: "inherit",
             }}
           >
-            dashboard
+            Dashboard
           </Link>
         </Box>
         <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
@@ -59,7 +62,7 @@ const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
               textDecoration: "inherit",
             }}
           >
-            predictions
+            Predictions
           </Link>
         </Box>
       </FlexBetween>

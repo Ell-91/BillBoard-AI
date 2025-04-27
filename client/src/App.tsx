@@ -1,25 +1,26 @@
+// src/App.tsx
 import { createTheme } from "@mui/material/styles";
 import { useMemo } from "react";
 import { themeSettings } from "./theme";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
+// Import the Layout component
+import Layout from "./components/layout/Layout";
+
+// Import page components
+// import Dashboard from "./pages/Dashboard";
+// import Predictions from "./pages/Predictions";
 
 const App = () => {
-  const theme = useMemo(() => createTheme(themeSettings), []); //only happens once on initial load usinf "[]"
+  const theme = useMemo(() => createTheme(themeSettings), []);
 
   return (
     <div className="app">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Box
-            width="100%"
-            height="100%"
-            padding="1rem 2rem 4rem 2rem"
-            color={"white"}
-          >
-            {/* <Navbar/> */}
+          <Layout>
             <Routes>
               <Route path="/" element={<div>dashboard page</div>} />
               <Route
@@ -27,7 +28,7 @@ const App = () => {
                 element={<div>predictions page</div>}
               />
             </Routes>
-          </Box>
+          </Layout>
         </ThemeProvider>
       </BrowserRouter>
     </div>
