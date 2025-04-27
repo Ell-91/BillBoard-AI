@@ -1,21 +1,38 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PixIcon from "@mui/icons-material/Pix";
-import { Box, Typography, useTheme } from "@mui/material";
-import FlexBetween from "../../components/FlexBetween";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box, Typography, useTheme, IconButton } from "@mui/material";
+import FlexBetween from "./FlexBetween";
 
-// type Props = {};
+type NavbarProps = {
+  drawerOpen: boolean;
+  toggleDrawer: () => void;
+};
 
-const Navbar = () => {
+const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("dashboard");
+  
   return (
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* LEFT SIDE */}
       <FlexBetween gap="0.75rem">
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={toggleDrawer}
+          edge="start"
+          sx={{
+            marginRight: 1,
+            ...(drawerOpen && { display: 'none' }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
         <PixIcon sx={{ fontSize: "28px" }} />
         <Typography variant="h4" fontSize="16px">
-          BillBoard-AI
+          Finanseer
         </Typography>
       </FlexBetween>
 
