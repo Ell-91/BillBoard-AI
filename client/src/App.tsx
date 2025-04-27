@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { themeSettings } from "./theme";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./scenes/navbar";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   const theme = useMemo(() => createTheme(themeSettings), []); //only happens once on initial load usinf "[]"
@@ -19,7 +19,7 @@ const App = () => {
             padding="1rem 2rem 4rem 2rem"
             color={"white"}
           >
-            <Navbar/>
+            {/* <Navbar/> */}
             <Routes>
               <Route path="/" element={<div>dashboard page</div>} />
               <Route
