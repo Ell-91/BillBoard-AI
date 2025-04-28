@@ -1,4 +1,3 @@
-// src/components/layout/Layout.tsx
 import { useState, ReactNode } from "react";
 import { Box, useTheme } from "@mui/material";
 import Navbar from "./Navbar";
@@ -18,25 +17,49 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <Navbar drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
-      <Box sx={{ display: "flex", flexGrow: 1 }}>
-        <Drawer 
-          drawerWidth={drawerWidth} 
-          open={drawerOpen} 
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+        backgroundColor: theme.palette.background.default,
+      }}
+    >
+      {/* Conditionally render Navbar */}
+      {!drawerOpen && (
+        <Navbar drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+      )}
+
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          overflow: "hidden",
+        }}
+      >
+        {/* Sidebar Drawer */}
+        <Drawer
+          drawerWidth={drawerWidth}
+          open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
         />
+
+        {/* Main Content */}
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            width: "100%",
-            padding: "1rem 2rem 4rem 2rem",
+            padding: "1rem",
             marginLeft: drawerOpen ? `${drawerWidth}px` : 0,
-            transition: theme.transitions.create(['margin'], {
+            transition: theme.transitions.create(["margin", "width"], {
               easing: theme.transitions.easing.sharp,
               duration: theme.transitions.duration.leavingScreen,
             }),
+            width: drawerOpen ? `calc(100vw - ${drawerWidth}px)` : "100vw",
+            maxHeight: "100vh",
+            overflow: "auto",
           }}
         >
           {children}

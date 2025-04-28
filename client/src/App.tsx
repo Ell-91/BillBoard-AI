@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 
 // Import page components
-// import Dashboard from "./pages/Dashboard";
+import Dashboard from "./scenes/dashboard";
 // import Predictions from "./pages/Predictions";
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
           <CssBaseline />
           <Layout>
             <Routes>
-              <Route path="/" element={<div>dashboard page</div>} />
+              <Route path="/" element={<Dashboard />} />
               <Route
                 path="/predictions"
                 element={<div>predictions page</div>}
