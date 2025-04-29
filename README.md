@@ -1,18 +1,30 @@
-# AI-Powered Legislative Data Visualization Tool
+# Billboard - AI Legislative Data Visualization Tool
 
 ## Overview
-The AI-Powered Legislative Data Visualization Tool is an interactive platform designed to aggregate, categorize, and visualize legislative data across various topics. It provides **real-time updates** on legislative activity, tracks the progress of bills (from introduction to passing), and offers AI-powered categorization for easy navigation of topics such as healthcare, education, environment, and more. 
 
-This tool empowers users to stay informed and engaged with the legislative process while delivering dynamic visualizations for an enhanced understanding of trends and outcomes.
+The **AI-Powered Legislative Data Visualization Tool** is an interactive platform designed to simplify the complexities of U.S. legislation. It aggregates and categorizes congressional data in real time, offering users a clear and engaging way to track bills from introduction to potential enactment. Key features include:
 
----
+- **Real-time bill tracking** with status updates at every legislative stage
+- **AI-driven topic classification** for streamlined exploration of categories like healthcare, education, environment, and more
+- **Insightful visualizations** that reveal legislative trends, outcomes, and policy focus areas
+
+By turning complex data into accessible insights, this tool empowers users to stay informed, explore legislation by topic, and better understand the shifting dynamics of the U.S. legislative process.
+
+## 📊 Sample Dashboard
+
+Below is a mockup of the legislative insights dashboard, illustrating how users can track bill activity by topic and view trends over time.
+
+## ![Dashboard Preview](dashboard-mock.png)
 
 ## Core Features
 
 ### Real-time Legislative Updates
-- The application monitors legislative activity, providing live updates on new bills introduced, amendments made, and their passing status through integration with live legislative feeds.
+
+- Continuously fetches legislative data using public APIs (ProPublica, GovTrack, and Open States).
+- Updates include bill introductions, amendments, and status changes.
 
 ### Bill Status Tracking
+
 - Monitor the progress of each bill through various stages:
   - Introduced
   - In Committee
@@ -20,9 +32,12 @@ This tool empowers users to stay informed and engaged with the legislative proce
   - Signed into Law or Vetoed
 
 ### AI-Powered Bill Categorization
-- Using Natural Language Processing (NLP) models such as spaCy and Hugging Face Transformers, the tool automatically categorizes bills into relevant topics based on their title and summary.
+
+- Uses Natural Language Processing (spaCy, Hugging Face Transformers) to analyze bill titles and summaries.
+- Automatically classifies bills into key categories like healthcare, education, environment, and more.
 
 ### Comprehensive Categorization
+
 - AI-powered categorization automatically sorts bills into predefined topics such as:
   - **Healthcare**: Access to healthcare services, affordability, and policy improvements.
   - **Education**: Funding, curriculum standards, and educational equity.
@@ -34,65 +49,66 @@ This tool empowers users to stay informed and engaged with the legislative proce
   - **Infrastructure**: Public transit, urban planning, and infrastructure development.
 
 ### Interactive Data Visualizations
+
 - Dynamic charts and graphs built with **D3.js** to explore trends such as:
-  - Number of bills introduced by topic.
-  - Proportion of bills passed within a given timeframe.
+  - Legislative activity by topic.
+  - Bill progress over time.
+  - Comparison of passed bills vs introduced bills within a given timeframe.
 
 ### Custom Alerts
-- Users can set personalized notifications for updates on bills related to topics or keywords of their chosing, including updates when a bill passes.
+
+- Users can subscribe to personalized notifications for updates on bills related to topics or keywords (coming soon).
+
 ---
 
 ## Tech Stack
 
 ### Frontend
-- **React**: JavaScript library for building user interfaces.
-- **Next.js**: Framework for server-side rendering and static site generation.
-- **Tailwind CSS**: Utility-first CSS framework for responsive design.
-- **Redux**: State management for dynamic and predictable data handling.
 
-- **D3.js**: Library for creating dynamic data visualizations.
+- **React + Next.js**: For dynamic, server-rendered pages.
+- **Tailwind CSS**: For responsive, utility-first design.
+- **Redux**: For managing application state.
+- **Recharts**: For building complex, data-driven visualizations.
 
 ### Backend
-- **Node.js**: JavaScript runtime for backend development.
-- **Express.js**: Framework for building RESTful APIs.
-- **PostgreSQL**: Relational database for storing legislative data.
-- **AWS Free Tier**: Provides scalable infrastructure, including:
-  - **AWS Lambda**: Serverless computing for processing API requests and AI models.
-  - **Amazon RDS (Relational Database Service)**: For hosting PostgreSQL databases.
-  - **Amazon S3**: For static file storage, such as datasets or visualization assets.
-  - **AWS API Gateway**: For securely exposing APIs.
 
-### AI Tools
-- **spaCy**: NLP library for text processing and entity recognition.
-- **Hugging Face Transformers**: For advanced NLP tasks, including categorizing bill summaries.
+- **Node.js + Express.js**: For REST API development.
+- **PostgreSQL**: Primary relational database used to store bill metadata and categorization tags.
+- **Socket.IO**: For real-time updates to the frontend.
+
+### AI + Natural Languge Processing (NLP)
+
+- **spaCy**: For text preprocessing and named entity recognition.
+- **Hugging Face Transformers**: For deep contextual understanding of bill summaries to improve topic classification.
 
 ### APIs Used
-- **Congress.gov API**: For fetching legislative data on bills, including their titles, summaries, and statuses.
-- **ProPublica Congress API**: https://projects.propublica.org/api-docs/congress-api/
-- **GovTrack API**: https://www.govtrack.us/about-our-data
-- **Open States API**: To access state-level legislative data.
-- **AWS SDK for JavaScript**: For integrating AWS services within the application.
+
+- **Congress.gov API**: Federal legislative data: bill titles, summaries, sponsorships, and status updates from the U.S. Congress.
+- **Open States API**: State-level legislative information: bills, legislators, and committees across all 50 states.
 
 ---
 
 ## Key Features
 
 ### Real-Time Legislative Updates
-- Leveraging **AWS Lambda** and **AWS API Gateway**, the tool fetches real-time legislative data from Congress.gov and Open States APIs.
+
 - Live updates are streamed using **Socket.IO**, ensuring users are always informed.
 
 ### AI-Powered Categorization
+
 - **NLP Models**: Bills are analyzed using spaCy and Hugging Face Transformers.
+
   - Example categorization logic:
+
     ```javascript
-    import spacy from 'spacy';
-    const nlp = spacy.load('en_core_web_sm');
+    import spacy from "spacy";
+    const nlp = spacy.load("en_core_web_sm");
 
     const categories = {
-      Healthcare: ['health', 'medicine', 'hospital'],
-      'Racial Justice': ['discrimination', 'equality'],
-      'Economic Inequality': ['poverty', 'wealth'],
-      'Environmental Justice': ['sustainability', 'climate'],
+      Healthcare: ["health", "medicine", "hospital"],
+      "Racial Justice": ["discrimination", "equality"],
+      "Economic Inequality": ["poverty", "wealth"],
+      "Environmental Justice": ["sustainability", "climate"],
     };
 
     function categorizeBill(title, summary) {
@@ -101,57 +117,69 @@ This tool empowers users to stay informed and engaged with the legislative proce
       const scores = {};
 
       for (const [category, keywords] of Object.entries(categories)) {
-        scores[category] = keywords.reduce((count, keyword) => count + (text.includes(keyword) ? 1 : 0), 0);
+        scores[category] = keywords.reduce(
+          (count, keyword) => count + (text.includes(keyword) ? 1 : 0),
+          0
+        );
       }
 
-      return Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
+      return Object.keys(scores).reduce((a, b) =>
+        scores[a] > scores[b] ? a : b
+      );
     }
     ```
 
 ### Data Visualizations
-- Trends in legislative activity are visualized using **D3.js**, highlighting active categories and the progression of bills over time.
+
+- Trends in legislative activity are visualized using **recharts**, highlighting active categories and the progression of bills over time.
 
 ### Custom Alerts
-- Notifications are managed using **Redux** for state management and **AWS SNS** (Simple Notification Service) for scalable alert delivery.
+
+- Notifications are managed using **Redux** for state management for scalable alert delivery.
 
 ---
 
 ## Motivation
+
 This project aims to:
-- Provide transparency and accessibility to legislative data.
-- Empower users to engage with legislative processes effectively.
-- Leverage modern technologies and AI to categorize and visualize complex datasets.
-- Practice full-stack development with a focus on scalability using AWS Free Tier.
+
+- Promote transparency and accessibility to legislative data.
+- Empower users to follow the policies they care about.
+- Use machine learning and data visualization to simplify complex legislative datasets.
+- Practice scalable full-stack application development without reliance on cloud vendors.
 
 ---
 
 ## How It Works
 
-1. **Data Collection**: Legislative data is fetched in real-time from Congress.gov and Open States APIs using AWS Lambda and API Gateway.
+1. **Data Collection**: Legislative data is fetched in real-time from Congress.gov and Open States APIs
 2. **Categorization**: Bills are analyzed with spaCy and Hugging Face models to identify relevant categories.
-3. **Visualization**: Data is processed and visualized with D3.js, ensuring users can explore trends dynamically.
+3. **Visualization**: Data is processed and visualized with recharts, ensuring users can explore trends dynamically.
 4. **State Management**: Redux ensures seamless synchronization of UI components with real-time data.
-5. **Alerts**: Custom alerts are sent via AWS SNS based on user preferences.
 
 ---
 
 ## Road Map
+
 ![Roadmap](RoadMap.png)
 
 ## Setup Instructions
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-repo/legislative-visualization-tool.git
    cd legislative-visualization-tool
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Set up environment variables for APIs and AWS credentials in a `.env` file:
+
    ```env
    CONGRESS_API_KEY=your_congress_api_key
    OPEN_STATES_API_KEY=your_open_states_api_key
@@ -160,6 +188,7 @@ This project aims to:
    ```
 
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -169,15 +198,16 @@ This project aims to:
 ---
 
 ## Future Enhancements
-- Add multilingual support for broader accessibility.
-- Expand categorization models to include more nuanced legislative topics.
-- Integrate user authentication for personalized dashboards.
+
+- Support for multilingual legislative summaries.
+- Improved bill recommendation system based on user preferences.
+- Integration with civic engagement tools for direct advocacy.
+- OAuth-based user authentication and saved alerts.
 
 ---
 
 ## Contributions
-Contributions are welcome! Please open an issue or submit a pull request to suggest improvements.
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ---
-
-
