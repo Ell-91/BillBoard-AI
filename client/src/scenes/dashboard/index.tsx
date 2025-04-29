@@ -1,50 +1,20 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import DashboardBox from "../../components/DashboardBox";
 
 const gridTemplateLargeScreens = `
   "a b c"
-  "a b c"
-  "a b c"
-  "a b f"
-  "d e f"
-  "d e f"
-  "d h i"
-  "g h i"
-  "g h j"
-  "g h j"
+  "d e e"
+  "f g g"
 `;
 
 const gridTemplateSmallScreens = `
   "a"
-  "a"
-  "a"
-  "a"
-  "b"
-  "b"
-  "b"
   "b"
   "c"
-  "c"
-  "c"
-  "d"
-  "d"
   "d"
   "e"
-  "e"
-  "f"
-  "f"
   "f"
   "g"
-  "g"
-  "g"
-  "h"
-  "h"
-  "h"
-  "h"
-  "i"
-  "i"
-  "j"
-  "j"
 `;
 
 const Dashboard = () => {
@@ -57,51 +27,81 @@ const Dashboard = () => {
       display="grid"
       gap="1.5rem"
       sx={{
-        backgroundColor: "#111827", // bg-gray-900
-        color: "#e5e7eb", // text-gray-200
+        backgroundColor: "#111827",
+        color: "#e5e7eb",
         padding: "1rem",
         ...(isAboveMediumScreens
           ? {
-              gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
-              gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
+              gridTemplateColumns: "repeat(3, minmax(300px, 1fr))", 
+              gridTemplateRows: "minmax(120px, auto) 1.5fr 1fr", 
               gridTemplateAreas: gridTemplateLargeScreens,
             }
           : {
               gridAutoColumns: "1fr",
-              gridAutoRows: "80px",
+              gridAutoRows: "minmax(100px, auto)",
               gridTemplateAreas: gridTemplateSmallScreens,
             }),
       }}
     >
+      {/* First Row (Smaller boxes) */}
       <DashboardBox bgcolor="#1f2937" gridArea="a">
-        A
+        <Typography variant="h6">Total Active Bills</Typography>
+        <Typography variant="h4">1,012</Typography>
+        <Typography color="lightgreen">+8% from last month</Typography>
       </DashboardBox>
       <DashboardBox bgcolor="#374151" gridArea="b">
-        B
+        <Typography variant="h6">Bills Passed This Month</Typography>
+        <Typography variant="h4">43</Typography>
+        <Typography color="tomato">-5% from last month</Typography>
       </DashboardBox>
       <DashboardBox bgcolor="#4b5563" gridArea="c">
-        C
+        <Typography variant="h6">Bills in Committee</Typography>
+        <Typography variant="h4">289</Typography>
+        <Typography color="lightgreen">+12% from last month</Typography>
       </DashboardBox>
+
+      {/* Second Row (Larger boxes) */}
       <DashboardBox bgcolor="#6b7280" gridArea="d">
-        D
+        <Typography variant="h6">Distribution by Category</Typography>
+        <Box
+          height="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {/* Insert the pie chart component here */}
+          <Typography>Pie Chart Placeholder</Typography>
+        </Box>
       </DashboardBox>
       <DashboardBox bgcolor="#9ca3af" gridArea="e">
-        E
+        <Typography variant="h6">Monthly Bill Activity</Typography>
+        <Box
+          height="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {/* Insert the bar graph component here */}
+          <Typography>Bar Graph Placeholder</Typography>
+        </Box>
       </DashboardBox>
+
+      {/* Third Row (Larger boxes) */}
       <DashboardBox bgcolor="#d1d5db" gridArea="f">
-        F
+        <Typography variant="h6">Recent Bills</Typography>
+        <Typography>HR-2354 – In Committee</Typography>
+        <Typography>Healthcare Access Improvement Act</Typography>
+        <Typography>Healthcare</Typography>
       </DashboardBox>
       <DashboardBox bgcolor="#f3f4f6" gridArea="g">
-        G
-      </DashboardBox>
-      <DashboardBox bgcolor="#e5e7eb" gridArea="h">
-        H
-      </DashboardBox>
-      <DashboardBox bgcolor="#d1d5db" gridArea="i">
-        I
-      </DashboardBox>
-      <DashboardBox bgcolor="#9ca3af" gridArea="j">
-        J
+        <Typography variant="h6">Legislative Categories</Typography>
+        <ul style={{ margin: 0, paddingLeft: "1rem" }}>
+          <li>Healthcare</li>
+          <li>Education</li>
+          <li>Energy</li>
+          <li>Transportation</li>
+          <li>Defense</li>
+        </ul>
       </DashboardBox>
     </Box>
   );
