@@ -1,4 +1,4 @@
-# Billboard - AI Legislative Data Visualization Tool
+# Billboard - AI (Legislative Data Visualization Tool)
 
 ## Overview
 
