@@ -1,9 +1,7 @@
 import DashboardBox from "@/components/DashboardBox";
 import { Typography } from "@mui/material";
 
-type Props = {};
-
-const Row1 = (props: Props) => {
+const Row1 = () => {
   return (
     <>
       {/* First Row (Smaller boxes) */}

@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
 import FlexBetween from "../FlexBetween";
 import GavelIcon from "@mui/icons-material/Gavel";
-// import BallotIcon from "@mui/icons-material/Ballot";
-// import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 type NavbarProps = {
   drawerOpen: boolean;
@@ -39,37 +37,40 @@ const Navbar = ({ drawerOpen, toggleDrawer }: NavbarProps) => {
       </FlexBetween>
 
       {/* RIGHT SIDE */}
-      <Box pr="2rem"></Box>
+      <Box pr="2rem" />
       {!drawerOpen && (
         <FlexBetween gap="2rem">
           <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
-            <Link
+            <Typography
+              component={RouterLink}
               to="/"
               onClick={() => setSelected("dashboard")}
-              style={{
-                color: selected === "dashboard" ? "inherit" : palette.grey[700],
-                textDecoration: "inherit",
+              sx={{
+                color:
+                  selected === "dashboard" ? "inherit" : palette.grey[700],
+                textDecoration: "none",
+                fontSize: "20px",
+                fontWeight: "bold",
               }}
             >
-              <Typography fontSize="20px" fontWeight="bold">
-                Dashboard
-              </Typography>
-            </Link>
+              Dashboard
+            </Typography>
           </Box>
           <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
-            <Link
+            <Typography
+              component={RouterLink}
               to="/predictions"
               onClick={() => setSelected("predictions")}
-              style={{
+              sx={{
                 color:
                   selected === "predictions" ? "inherit" : palette.grey[700],
-                textDecoration: "inherit",
+                textDecoration: "none",
+                fontSize: "20px",
+                fontWeight: "bold",
               }}
             >
-              <Typography fontSize="20px" fontWeight="bold">
-                Predictions
-              </Typography>
-            </Link>
+              Predictions
+            </Typography>
           </Box>
         </FlexBetween>
       )}

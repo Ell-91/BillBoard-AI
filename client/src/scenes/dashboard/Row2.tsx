@@ -1,9 +1,7 @@
 import DashboardBox from "@/components/DashboardBox";
 import { Box, Typography } from "@mui/material";
 
-type Props = {};
-
-const Row2 = (props: Props) => {
+const Row2 = () => {
   return (
     <>
       <DashboardBox bgcolor="#6b7280" gridArea="d">
